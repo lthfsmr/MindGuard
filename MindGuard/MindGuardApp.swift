@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct MindGuardApp: App {
+
+    @StateObject private var connectivity = WatchConnectivityManager.shared
+
     var body: some Scene {
+
         WindowGroup {
-            ContentView()
+
+            DashboardView()
+                .environmentObject(connectivity)
         }
     }
 }
