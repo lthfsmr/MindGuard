@@ -11,4 +11,5 @@ import Foundation
 struct EmotionalMetrics {
     let heartRate: Double
     let timestamp: Date
+    let activityState: ActivityState
 }

@@ -5,7 +5,6 @@
 //  Created by Luthfi Asmara on 13/11/26.
 //
 
-
 import Foundation
 import HealthKit
 import Combine
@@ -23,6 +22,10 @@ final class HealthKitManager: ObservableObject {
     private var observerQuery: HKObserverQuery?
 
     private var isStarted = false
+
+    private var isFetching = false
+
+    private var pendingCompletionHandlers: [() -> Void] = []
 
     private let engine = EmotionalEngine.shared
 
@@ -67,13 +70,9 @@ final class HealthKitManager: ObservableObject {
             )
         }
 
-        let readTypes: Set<HKObjectType> = [
-            heartRateType
-        ]
-
         try await healthStore.requestAuthorization(
             toShare: [],
-            read: readTypes
+            read: [heartRateType]
         )
 
         await MainActor.run {
@@ -90,7 +89,6 @@ final class HealthKitManager: ObservableObject {
         }
 
         do {
-
             try await requestAuthorization()
 
             isStarted = true
@@ -125,10 +123,7 @@ final class HealthKitManager: ObservableObject {
                 return
             }
 
-            print(
-                "Background delivery enabled:",
-                success
-            )
+            print("Background delivery enabled:", success)
         }
     }
 
@@ -174,14 +169,28 @@ final class HealthKitManager: ObservableObject {
         completion: (() -> Void)? = nil
     ) {
 
+        if let completion {
+            pendingCompletionHandlers.append(completion)
+        }
+
+        guard !isFetching else {
+            return
+        }
+
+        isFetching = true
+
         let startDate = lastProcessedDate
 
-        let predicate: NSPredicate?
+        let predicate: NSPredicate
 
         if let startDate {
 
+            // Overlap the last timestamp to avoid missing samples
+            // that share the same timestamp.
+            let overlappingDate = startDate.addingTimeInterval(-1)
+
             predicate = HKQuery.predicateForSamples(
-                withStart: startDate,
+                withStart: overlappingDate,
                 end: nil,
                 options: .strictStartDate
             )
@@ -202,27 +211,24 @@ final class HealthKitManager: ObservableObject {
         }
 
         let sortDescriptor = NSSortDescriptor(
-            key: HKSampleSortIdentifierStartDate,
-            ascending: startDate != nil
+            key: HKSampleSortIdentifierEndDate,
+            ascending: true
         )
-
-        let limit = startDate == nil
-            ? 20
-            : HKObjectQueryNoLimit
 
         let query = HKSampleQuery(
             sampleType: heartRateType,
             predicate: predicate,
-            limit: limit,
+            limit: HKObjectQueryNoLimit,
             sortDescriptors: [sortDescriptor]
         ) { [weak self] _, samples, error in
 
-            defer {
-                completion?()
-            }
-
             guard let self else {
                 return
+            }
+
+            defer {
+                self.isFetching = false
+                self.finishPendingCompletions()
             }
 
             if let error {
@@ -233,23 +239,15 @@ final class HealthKitManager: ObservableObject {
             guard let samples = samples as? [HKQuantitySample],
                   !samples.isEmpty else {
 
-                print("No heart rate samples available")
+                print("No new heart rate samples")
                 return
             }
 
-            // Initial fetch returns newest 20 samples.
-            // Reverse them to process chronologically.
-            let orderedSamples: [HKQuantitySample] = startDate == nil
-                ? Array(samples.reversed())
-                : samples
-            
-            let isInitialFetch = startDate == nil
-
-            for sample in orderedSamples {
+            for sample in samples {
 
                 self.processSample(
                     sample,
-                    notify: !isInitialFetch
+                    notify: startDate != nil
                 )
             }
         }
@@ -299,9 +297,22 @@ final class HealthKitManager: ObservableObject {
         print("Timestamp:", timestamp)
         print("Emotional State:", state)
 
-        if notify && engine.shouldSendNotification() {
+        if notify,
+           state == .potentialStress,
+           engine.shouldSendNotification() {
 
             NotificationManager.shared.sendMindfulnessNotification()
         }
+    }
+
+    // MARK: - Completion
+
+    private func finishPendingCompletions() {
+
+        let completions = pendingCompletionHandlers
+
+        pendingCompletionHandlers.removeAll()
+
+        completions.forEach { $0() }
     }
 }
