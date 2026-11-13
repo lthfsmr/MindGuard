@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DashboardView: View {
 
-    @EnvironmentObject var connectivity: WatchConnectivityManager
+    @EnvironmentObject var healthKitManager: HealthKitManager
 
     var body: some View {
 
@@ -18,32 +18,33 @@ struct DashboardView: View {
 
             VStack(spacing: 24) {
 
-                VStack(spacing: 8) {
-
-                    Text("MindGuard")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-
-                    Text("Your mindful companion")
-                        .foregroundStyle(.secondary)
-                }
+                Text("MindGuard")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
 
                 VStack(spacing: 8) {
 
-                    Text("Heart Rate")
+                    Text("Latest Heart Rate")
                         .font(.headline)
 
                     Text(
-                        connectivity.latestHeartRate > 0
-                        ? "\(Int(connectivity.latestHeartRate)) BPM"
+                        healthKitManager.latestHeartRate > 0
+                        ? "\(Int(healthKitManager.latestHeartRate)) BPM"
                         : "-- BPM"
                     )
                     .font(.system(size: 48, weight: .bold))
+
+                    if let date = healthKitManager.latestSampleDate {
+
+                        Text("Updated: \(date.formatted(date: .abbreviated, time: .shortened))")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
 
                 VStack(spacing: 8) {
 
-                    Text("Current State")
+                    Text("Physiological State")
                         .font(.headline)
 
                     Text(stateDescription)
@@ -52,60 +53,40 @@ struct DashboardView: View {
                         .foregroundStyle(stateColor)
                 }
 
-                HStack {
+                if let error = healthKitManager.errorMessage {
 
-                    Circle()
-                        .fill(
-                            connectivity.connectionStatus == "Connected"
-                            ? .green
-                            : .red
-                        )
-                        .frame(width: 10, height: 10)
-
-                    Text("Apple Watch: \(connectivity.connectionStatus)")
-                        .font(.subheadline)
+                    Text(error)
+                        .foregroundStyle(.red)
+                        .font(.caption)
                 }
-
-                Button("Enable Notifications") {
-
-                    Task {
-                        let granted = await NotificationManager.shared
-                            .requestPermission()
-
-                        print("Notification permission:", granted)
-                    }
-                }
-                .buttonStyle(.borderedProminent)
 
                 Spacer()
             }
             .padding()
-            .navigationBarHidden(true)
         }
     }
 
     private var stateDescription: String {
 
-        switch connectivity.emotionalState {
+        switch healthKitManager.emotionalState {
 
         case .calibrating:
-            return "Calibrating baseline..."
+            return "Calibrating..."
 
         case .normal:
-            return "You're doing well 🌿"
+            return "Normal 🌿"
 
         case .elevated:
-            return "Elevated heart rate"
+            return "Elevated Heart Rate"
 
         case .potentialStress:
-            return "Take a moment to breathe"
-
+            return "Take a Breath"
         }
     }
 
     private var stateColor: Color {
 
-        switch connectivity.emotionalState {
+        switch healthKitManager.emotionalState {
 
         case .calibrating:
             return .gray

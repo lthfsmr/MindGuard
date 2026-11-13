@@ -10,14 +10,18 @@ import SwiftUI
 @main
 struct MindGuardApp: App {
 
-    @StateObject private var connectivity = WatchConnectivityManager.shared
+    @StateObject private var healthKitManager =
+        HealthKitManager.shared
 
     var body: some Scene {
 
         WindowGroup {
 
             DashboardView()
-                .environmentObject(connectivity)
+                .environmentObject(healthKitManager)
+                .task {
+                    await healthKitManager.start()
+                }
         }
     }
 }

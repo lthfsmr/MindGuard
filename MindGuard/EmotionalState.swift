@@ -37,11 +37,11 @@ final class EmotionalEngine {
 
     private let elevationPercentage: Double = 1.20
 
-    private let requiredElevationDuration: TimeInterval = 60
+    private let requiredElevationDuration: TimeInterval = 600
 
+    private let maximumSampleGap: TimeInterval = 900
+    
     private let notificationCooldown: TimeInterval = 1800
-
-    private let maximumSampleGap: TimeInterval = 180
 
     private(set) var currentState: EmotionalState = .calibrating
 
