@@ -6,20 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		228026CD30A5FBF800BFD491 /* MindGuardWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 228026C330A5FBF600BFD491 /* MindGuardWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		228026CB30A5FBF800BFD491 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2280269F30A5FB8400BFD491 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 228026C230A5FBF600BFD491;
-			remoteInfo = "MindGuardWatch Watch App";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		228026D130A5FBF800BFD491 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -27,7 +13,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				228026CD30A5FBF800BFD491 /* MindGuardWatch Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,7 +21,6 @@
 
 /* Begin PBXFileReference section */
 		228026A730A5FB8400BFD491 /* MindGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		228026C330A5FBF600BFD491 /* MindGuardWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MindGuardWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -60,13 +44,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		228026C030A5FBF600BFD491 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -83,7 +60,6 @@
 			isa = PBXGroup;
 			children = (
 				228026A730A5FB8400BFD491 /* MindGuard.app */,
-				228026C330A5FBF600BFD491 /* MindGuardWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,7 +79,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				228026CC30A5FBF800BFD491 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				228026A930A5FB8400BFD491 /* MindGuard */,
@@ -113,28 +88,6 @@
 			);
 			productName = MindGuard;
 			productReference = 228026A730A5FB8400BFD491 /* MindGuard.app */;
-			productType = "com.apple.product-type.application";
-		};
-		228026C230A5FBF600BFD491 /* MindGuardWatch Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 228026CE30A5FBF800BFD491 /* Build configuration list for PBXNativeTarget "MindGuardWatch Watch App" */;
-			buildPhases = (
-				228026BF30A5FBF600BFD491 /* Sources */,
-				228026C030A5FBF600BFD491 /* Frameworks */,
-				228026C130A5FBF600BFD491 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				228026C430A5FBF600BFD491 /* MindGuardWatch Watch App */,
-			);
-			name = "MindGuardWatch Watch App";
-			packageProductDependencies = (
-			);
-			productName = "MindGuardWatch Watch App";
-			productReference = 228026C330A5FBF600BFD491 /* MindGuardWatch Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -148,9 +101,6 @@
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					228026A630A5FB8400BFD491 = {
-						CreatedOnToolsVersion = 26.1.1;
-					};
-					228026C230A5FBF600BFD491 = {
 						CreatedOnToolsVersion = 26.1.1;
 					};
 				};
@@ -170,20 +120,12 @@
 			projectRoot = "";
 			targets = (
 				228026A630A5FB8400BFD491 /* MindGuard */,
-				228026C230A5FBF600BFD491 /* MindGuardWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		228026A530A5FB8400BFD491 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		228026C130A5FBF600BFD491 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -200,22 +142,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		228026BF30A5FBF600BFD491 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		228026CC30A5FBF800BFD491 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 228026C230A5FBF600BFD491 /* MindGuardWatch Watch App */;
-			targetProxy = 228026CB30A5FBF800BFD491 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		228026B030A5FB8700BFD491 /* Debug */ = {
@@ -407,74 +334,6 @@
 			};
 			name = Release;
 		};
-		228026CF30A5FBF800BFD491 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "MindGuardWatch Watch App/MindGuardWatch Watch App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PHLTY62QB3;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MindGuardWatch;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = dev.luthfiasmara.MindGuard;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.luthfiasmara.MindGuard.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.1;
-			};
-			name = Debug;
-		};
-		228026D030A5FBF800BFD491 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "MindGuardWatch Watch App/MindGuardWatch Watch App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PHLTY62QB3;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MindGuardWatch;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = dev.luthfiasmara.MindGuard;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.luthfiasmara.MindGuard.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.1;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -492,15 +351,6 @@
 			buildConfigurations = (
 				228026B330A5FB8700BFD491 /* Debug */,
 				228026B430A5FB8700BFD491 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		228026CE30A5FBF800BFD491 /* Build configuration list for PBXNativeTarget "MindGuardWatch Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				228026CF30A5FBF800BFD491 /* Debug */,
-				228026D030A5FBF800BFD491 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

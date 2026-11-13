@@ -239,10 +239,10 @@ final class HealthKitManager: ObservableObject {
 
             // Initial fetch returns newest 20 samples.
             // Reverse them to process chronologically.
-            let orderedSamples = startDate == nil
-                ? samples.reversed()
-                : samples[...]
-
+            let orderedSamples: [HKQuantitySample] = startDate == nil
+                ? Array(samples.reversed())
+                : samples
+            
             let isInitialFetch = startDate == nil
 
             for sample in orderedSamples {
