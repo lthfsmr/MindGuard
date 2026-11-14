@@ -5,8 +5,9 @@
 //  Created by Luthfi Asmara on 13/11/26.
 //
 
+import Foundation
 
-enum ActivityState {
+enum ActivityState: String {
     case stationary
     case walking
     case running

@@ -275,34 +275,15 @@ final class HealthKitManager: ObservableObject {
             return
         }
 
-        let metrics = EmotionalMetrics(
-            heartRate: heartRate,
-            timestamp: timestamp
-        )
-
-        let state = engine.process(metrics)
-
         lastProcessedDate = timestamp
 
         DispatchQueue.main.async {
-
             self.latestHeartRate = heartRate
-
             self.latestSampleDate = timestamp
-
-            self.emotionalState = state
         }
 
-        print("Heart Rate:", heartRate)
+        print("HealthKit Heart Rate:", heartRate)
         print("Timestamp:", timestamp)
-        print("Emotional State:", state)
-
-        if notify,
-           state == .potentialStress,
-           engine.shouldSendNotification() {
-
-            NotificationManager.shared.sendMindfulnessNotification()
-        }
     }
 
     // MARK: - Completion
